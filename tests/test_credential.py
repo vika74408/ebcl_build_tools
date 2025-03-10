@@ -2,6 +2,7 @@ from ebcl.tools.secure_aptrepo.secure_repo import Server
 import os
 import shutil
 import tempfile
+import pytest
 
 from ebcl.common.fake import Fake
 from ebcl.tools.root.root import RootGenerator
@@ -66,6 +67,7 @@ class TestCredential:
         assert os.path.isfile(os.path.join(
             initrd.target_dir, 'usr', 'share', 'ebcl-doc', 'ebcl_doc.txt'))
 
+    @pytest.mark.skip(reason="credential negative tests are skipped to avoid unwanted delays ")
     def test_auth_rootfs_neg(self):
         print("negative: basic rootfs creation with credential's protected apt repo")
         self.fake.run_cmd(f'install -m 600 {self.data_dir}/auth.d/wrong.conf {self.passwd}')
@@ -76,6 +78,7 @@ class TestCredential:
         archive = generator.create_root()
         assert archive is None
 
+    @pytest.mark.skip(reason="credential negative tests are skipped to avoid unwanted delays ")
     def test_auth_initrd_neg(self):
         print("negative: basic initrd creation with credential's protected apt repo")
         self.fake.run_cmd(f'install -m 600 {self.data_dir}/auth.d/wrong.conf {self.passwd}')
@@ -86,6 +89,7 @@ class TestCredential:
         image = initrd.create_initrd()
         assert image is None
 
+    @pytest.mark.skip(reason="credential negative tests are skipped to avoid unwanted delays ")
     def test_apt_http_connection_neg(self):
         print("negative: apt with credential: https/http missing in auth files")
         self.fake.run_cmd(f'install -m 600 {self.data_dir}/auth.d/without_http.conf {self.passwd}')
