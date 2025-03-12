@@ -41,6 +41,7 @@ class TestCredential:
         shutil.rmtree(cls.temp_dir)
         cls.fake.run_cmd(f'rm -fr {cls.repo_dir}/*')
 
+    @pytest.mark.dev_container
     def test_auth_rootfs(self):
         print("basic rootfs creation with credential's protected apt repo")
         self.fake.run_cmd(f'install -m 600 {self.data_dir}/auth.d/good.conf {self.passwd}')
