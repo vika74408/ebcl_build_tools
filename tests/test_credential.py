@@ -9,6 +9,7 @@ from ebcl.tools.root.root import RootGenerator
 from ebcl.tools.initrd.initrd import InitrdGenerator
 
 
+@pytest.mark.dev_container
 class TestCredential:
 
     yaml: str
@@ -42,7 +43,6 @@ class TestCredential:
         cls.fake.run_cmd(f'rm -fr {cls.repo_dir}/*')
 
     def test_auth_rootfs(self):
-        print("basic rootfs creation with credential's protected apt repo")
         self.fake.run_cmd(f'install -m 600 {self.data_dir}/auth.d/good.conf {self.passwd}')
         self.fake.run_cmd('rm -fr /workspace/state/*')
 
@@ -53,7 +53,6 @@ class TestCredential:
         assert os.path.isfile(archive)
 
     def test_auth_initrd(self):
-        print("basic initrd creation with credential's protected apt repo")
         self.fake.run_cmd(f'install -m 600 {self.data_dir}/auth.d/good.conf {self.passwd}')
         self.fake.run_cmd('rm -fr /workspace/state/*')
 

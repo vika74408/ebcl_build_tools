@@ -1,5 +1,5 @@
 kernel: null
-use_ebcl_apt: true
+#use_ebcl_apt: true
 arch: amd64
 # Name of the archive.
 name: ebcl_dummy
